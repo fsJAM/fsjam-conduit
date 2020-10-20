@@ -44,6 +44,8 @@ model Article {
 model Comment {
     id              String  @id  @default(cuid())
     body            String
+    author          Profile  @relation(fields: [authorId], references: [id])
+    authorId        String
     createdAt       DateTime  @default(now())
     updatedAt       DateTime  @updatedAt
 }
