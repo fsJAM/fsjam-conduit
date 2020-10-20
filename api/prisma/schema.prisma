@@ -35,6 +35,8 @@ model Article {
     body            String
     comments        Comment[]
     tags            Tag[]
+    author          Profile   @relation(name: "ArticleAuthor", fields:[authorId], references:[id])
+    authorId        String
     createdAt       DateTime  @default(now())
     updatedAt       DateTime  @updatedAt
 }
