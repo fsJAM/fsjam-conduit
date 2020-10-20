@@ -28,6 +28,7 @@ model Profile {
     userId          String      // relation scalar field (used in the `@relation` attribute above)
     following       Profile[]   @relation("UserFollows", references: [id])
     followers       Profile[]   @relation("UserFollows", references: [id])
+    favoriteArticles  Article[]  @relation(name: "FavoritedArticles", references: [id])
 }
 
 model Article {
@@ -39,6 +40,7 @@ model Article {
     tags            Tag[]
     author          Profile   @relation(name: "ArticleAuthor", fields:[authorId], references:[id])
     authorId        String
+    favoritedBy     Profile[]  @relation(name: "FavoritedArticles", references: [id])
     createdAt       DateTime  @default(now())
     updatedAt       DateTime  @updatedAt
 }
