@@ -14,6 +14,7 @@ async function main() {
   const existing = await db.user.findMany({where: {email: process.env.DEFAULT_USER_ADMIN_EMAIL}})
 
   if (!existing.length) {
+
     await db.user.create({
       data: {
         email: process.env.DEFAULT_USER_ADMIN_EMAIL,
@@ -21,6 +22,18 @@ async function main() {
       }
     })
     console.log('default admin user created')
+
+    await db.profile.create({
+      data: {
+        name: process.env.DEFAULT_USER_ADMIN_PROFILE_NAME,
+        bio: process.env.DEFAULT_USER_ADMIN_PROFILE_BIO,
+        user: {
+          connect: { email: process.env.DEFAULT_USER_ADMIN_EMAIL },
+        }
+      }
+    })
+    console.log('default admin profile created')
+
   }
 
 }
