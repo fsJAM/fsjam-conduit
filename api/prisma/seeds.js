@@ -11,8 +11,6 @@ async function main() {
   // will result in the same database state (usually by checking for the
   // existence of a record before trying to create it).
 
-  console.log(process.env.SEEDING_MESSAGE)
-
   const existing = await db.user.findMany({where: {email: process.env.DEFAULT_USER_ADMIN_EMAIL}})
 
   if (!existing.length) {
@@ -22,6 +20,7 @@ async function main() {
         password: process.env.DEFAULT_USER_ADMIN_PASSWORD
       }
     })
+    console.log('default admin user created')
   }
 
 }
