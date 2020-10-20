@@ -33,6 +33,8 @@ model Article {
     title           String
     description     String
     body            String
+    comments        Comment[]
+    tags            Tag[]
     createdAt       DateTime  @default(now())
     updatedAt       DateTime  @updatedAt
 }
@@ -47,4 +49,5 @@ model Comment {
 model Tag {
     id              String  @id  @default(cuid())
     name            String  @unique
+    articles        Article[]
 }
